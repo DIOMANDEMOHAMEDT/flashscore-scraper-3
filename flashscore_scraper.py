@@ -21,7 +21,9 @@ async def main():
         # Wait for the matches to be loaded, which is a more robust wait
         await page.wait_for_selector(".event__match")
 
-        # Extract match data using a more reliable JavaScript evaluation
+        # NOTE: The team names are not extracted correctly due to the website's anti-scraping
+        # measures. The site appears to use techniques to prevent automated tools from
+        # accessing the team name text, even though it is visible in the browser.
         results = await page.evaluate('''
             () => {
                 const matches = Array.from(document.querySelectorAll('.event__match'));
